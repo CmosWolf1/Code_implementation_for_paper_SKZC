@@ -1,1 +1,1 @@
-# Code implementation for paper OLOC
+# Code implementation for paper SD-OWOD
