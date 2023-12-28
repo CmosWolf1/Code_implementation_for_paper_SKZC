@@ -1,2 +1,2 @@
-# Code implementation for paper SD-OWOD
+# Code implementation for paper SDZC
 Updating...
