@@ -1,2 +1,2 @@
-# Code implementation for paper SDZC
+# Code implementation for paper SKZC
 Updating...
