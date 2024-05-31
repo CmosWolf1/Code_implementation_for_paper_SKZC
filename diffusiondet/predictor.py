@@ -5,7 +5,6 @@ import multiprocessing as mp
 from collections import deque
 import cv2
 import torch
-
 from detectron2.data import MetadataCatalog
 from detectron2.engine.defaults import DefaultPredictor
 from detectron2.utils.video_visualizer import VideoVisualizer
@@ -24,6 +23,17 @@ class VisualizationDemo(object):
         self.metadata = MetadataCatalog.get(
             cfg.DATASETS.TEST[0] if len(cfg.DATASETS.TEST) else "__unused"
         )
+        # thing_classes = self.metadata.get("thing_classes", [])
+        # if len(thing_classes) < 81 or thing_classes[80] != "unknown":
+        #     thing_classes.extend([""] * (81 - len(thing_classes)))
+        #     thing_classes[80] = "unknown"
+        # self.metadata.set(thing_classes=thing_classes)
+        # self.metadata.set(thing_dataset_id_to_contiguous_id=thing_classes)
+        self.metadata.thing_classes.append('unknown')
+        self.metadata.thing_colors.append([150, 150, 150])
+        self.metadata.thing_dataset_id_to_contiguous_id[91] = 80
+
+
         self.cpu_device = torch.device("cpu")
         self.instance_mode = instance_mode
 
@@ -50,8 +60,16 @@ class VisualizationDemo(object):
         predictions = self.predictor(image)
         # Filter
         instances = predictions['instances']
-        new_instances = instances[instances.scores > self.threshold]
-        predictions = {'instances': new_instances}
+        # new_instances = instances[instances.scores > self.threshold]
+        new_instances = instances[instances.scores > 0.3]
+        new_ins = new_instances
+        # new_ins._fields["scores"][0].unsqueeze(0)
+        # new_ins._fields["pred_classes"][0].unsqueeze(0)
+        # a = new_ins._fields["scores"].unsqueeze(0)[0]
+        for i, pred_class in enumerate(new_ins._fields["scores"].unsqueeze(0)[0]):
+            if pred_class < 0.5:
+                new_ins._fields["pred_classes"].unsqueeze(0)[0][i] = 80
+        predictions = {'instances': new_ins}
         # Convert image from OpenCV BGR format to Matplotlib RGB format.
         image = image[:, :, ::-1]
         visualizer = Visualizer(image, self.metadata, instance_mode=self.instance_mode)
@@ -67,6 +85,9 @@ class VisualizationDemo(object):
                 )
             if "instances" in predictions:
                 instances = predictions["instances"].to(self.cpu_device)
+
+                # if 80 not in metadata.thing_classes:
+
                 vis_output = visualizer.draw_instance_predictions(predictions=instances)
 
         return predictions, vis_output

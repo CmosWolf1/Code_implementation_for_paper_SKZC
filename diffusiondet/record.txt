@@ -1,0 +1,164 @@
+device: Intel Core i7-12700k, NVIDIA RTX4090
+
+CIFAR-10
+KMeans：              NMI: 0.759, ACC: 0.862, ARI: 0.726, time_cost: 11.341 second
+Agglomerative:       NMI: 0.722, ACC: 0.742, ARI: 0.632, time_cost: 775.431 second
+AffinityPropagation: NMI: 0.463, ACC: 0.0407, ARI: 0.031, time_cost: 62.304 second ?
+CC:                  NMI: 0.705,  ACC: 0.790,  ARI: 0.637  time_cost: -
+KNN（6）:            NMI: 0.909, ACC: 0.962, ARI: 0.919, time_cost: 353.718 second
+
+STL-10
+KMeans:              NMI: 0.945, ACC: 0.975, ARI: 0.944, time_cost: 0.999 second        done
+Agglomerative:       NMI: 0.930, ACC: 0.964, ARI: 0.924, time_cost: 11.397 second
+AffinityPropagation  NMI: 0.532, ACC: 0.054, ARI: 0.042, time_cost: 188.215 second   done
+CC:                  NMI: 0.764, ACC: 0.850, ARI: 0.726, time_cost: - second
+KNN(19):              NMI: 0.976, ACC: 0.991, ARI: 0.981, time_cost: 45.558 second      done
+
+ImageNet-10
+KMeans:              NMI: 0.972, ACC: 0.990, ARI: 0.978, time_cost: 1.470 second
+Agglomerative:       NMI: 0.958, ACC: 0.981, ARI: 0.958, time_cost: 32.619 second
+AffinityPropagation  NMI: 0.580, ACC: 0.090, ARI: 0.082, time_cost: 118.944 second
+CC:                  NMI: 0.859, ACC: 0.893, ARI: 0.822, time_cost: - second
+KNN(7):              NMI: 0.983, ACC: 0.994, ARI: 0.987, time_cost: 7.955 second(including time finding the best parameter)
+
+CIFAR-100
+KMeans:              NMI: 0.623, ACC: 0.482, ARI: 0.326, time_cost: 11.107 second done
+Agglomerative:       NMI: 0.622, ACC: 0.472, ARI: 0.308, time_cost: 18.489 second done
+AffinityPropagation  NMI: 0.637, ACC: 0.179, ARI: 0.131, time_cost: 97.377 second ?
+CC:                  NMI: 0.431, ACC: 0.429, ARI: 0.266, time_cost: - second
+KNN(11):             NMI: 0.801, ACC: 0.818, ARI: 0.677, time_cost: 17.436 second done
+
+############################################# DINO compare ##################################################
+CIFAR-10:
+base8(6):    NMI: 0.909, ACC: 0.962, ARI: 0.919 done
+base16(6):   NMI: 0.897, ACC: 0.956, ARI: 0.905, time_cost: 17.623 second done
+small8(12)： NMI: 0.855,  ACC: 0.934,  ARI: 0.860  time_cost: 5.513
+small16(8):  NMI: 0.832, ACC: 0.922, ARI: 0.837, time_cost: 10.129 second
+
+CIFAR-100:
+base8(11):    NMI: 0.801, ACC: 0.818, ARI: 0.677, time_cost: 17.436 second done
+base16(9):   NMI: 0.800, ACC: 0.818, ARI: 0.678, time_cost: 17.623 second
+small8(14)： NMI: 0.758,  ACC: 0.775,  ARI: 0.612  time_cost: 5.513         done
+small16(18):  NMI: 0.715, ACC: 0.734, ARI: 0.552, time_cost: 10.129 second done
+
+CIFAR-10:
+#########################################  base8  #########################################
+Class:     airplane  automobile  bird    cat    deer   dog    frog    horse   ship    truck
+f1-score:  0.846     0.894       0.783   0.796  0.844  0.795  0.881   0.855   0.860   0.862
+Precision: 0.913     0.935       0.929   0.796  0.898  0.863  0.950   0.928   0.948   0.949
+Recall:    0.846     0.894       0.783   0.796  0.844  0.795  0.881   0.855   0.860   0.862
+Overall Accuracy: 0.842
+#########################################  base16  ########################################
+Class:     airplane  automobile  bird    cat    deer   dog    frog    horse   ship    truck
+Accuracy:  0.901     0.941       0.822   0.849  0.859  0.828  0.954   0.871   0.919   0.938
+Precision: 0.851     0.950       0.915   0.773  0.867  0.865  0.898   0.935   0.943   0.905
+Recall:    0.901     0.941       0.822   0.849  0.859  0.828  0.954   0.871   0.919   0.938
+Overall Accuracy: 0.8882
+########################################  small8  #########################################
+Class:     airplane  automobile  bird    cat    deer   dog    frog    horse   ship    truck
+Accuracy:  0.885     0.940       0.766   0.779  0.814  0.775  0.900   0.824   0.913   0.896
+Precision: 0.839     0.910       0.896   0.708  0.816  0.788  0.834   0.873   0.939   0.914
+Recall:    0.885     0.940       0.766   0.779  0.814  0.775  0.900   0.824   0.913   0.896
+Overall Accuracy: 0.849
+########################################  small16  ########################################
+Class:     airplane  automobile  bird    cat    deer   dog    frog    horse   ship    truck
+Accuracy:  0.802     0.917       0.711   0.761  0.750  0.760  0.862   0.801   0.882   0.890
+Precision: 0.794     0.906       0.816   0.652  0.788  0.788  0.795   0.858   0.891   0.877
+Recall:    0.802     0.917       0.711   0.761  0.750  0.760  0.862   0.801   0.882   0.890
+Overall Accuracy: 0.814
+base8:
+              precision    recall  f1-score   support
+
+    airplane      0.913     0.846     0.878      1000
+  automobile      0.935     0.894     0.914      1000
+        bird      0.929     0.783     0.850      1000
+         cat      0.796     0.796     0.796      1000
+        deer      0.898     0.844     0.870      1000
+         dog      0.863     0.795     0.828      1000
+        frog      0.950     0.881     0.914      1000
+       horse      0.928     0.855     0.890      1000
+        ship      0.948     0.860     0.902      1000
+       truck      0.949     0.862     0.904      1000
+
+   micro avg      0.910     0.842     0.874     10000
+   macro avg      0.911     0.842     0.875     10000
+base16:
+                 precision    recall  f1-score   support
+
+    airplane      0.879     0.832     0.855      1000
+  automobile      0.959     0.881     0.918      1000
+        bird      0.922     0.758     0.832      1000
+         cat      0.781     0.795     0.788      1000
+        deer      0.874     0.821     0.847      1000
+         dog      0.866     0.771     0.816      1000
+        frog      0.903     0.901     0.902      1000
+       horse      0.939     0.843     0.888      1000
+        ship      0.945     0.865     0.903      1000
+       truck      0.905     0.893     0.899      1000
+
+   micro avg      0.896     0.836     0.865     10000
+   macro avg      0.897     0.836     0.865     10000
+small8:
+               precision    recall  f1-score   support
+
+    airplane      0.866     0.814     0.839      1000
+  automobile      0.916     0.889     0.902      1000
+        bird      0.903     0.701     0.789      1000
+         cat      0.715     0.724     0.720      1000
+        deer      0.824     0.781     0.802      1000
+         dog      0.791     0.746     0.768      1000
+        frog      0.837     0.842     0.839      1000
+       horse      0.887     0.803     0.843      1000
+        ship      0.942     0.854     0.896      1000
+       truck      0.918     0.847     0.881      1000
+
+   micro avg      0.857     0.800     0.828     10000
+   macro avg      0.860     0.800     0.828     10000
+small16:
+              precision    recall  f1-score   support
+
+    airplane      0.807     0.741     0.773      1000
+  automobile      0.909     0.869     0.889      1000
+        bird      0.826     0.644     0.724      1000
+         cat      0.644     0.697     0.669      1000
+        deer      0.786     0.717     0.750      1000
+         dog      0.787     0.689     0.735      1000
+        frog      0.800     0.806     0.803      1000
+       horse      0.865     0.762     0.810      1000
+        ship      0.886     0.835     0.860      1000
+       truck      0.873     0.854     0.863      1000
+
+   micro avg      0.816     0.761     0.788     10000
+   macro avg      0.818     0.761     0.788     10000
+
+CIFAR-100
+base8
+10*10(no normalize)
+micro avg      0.715     0.692     0.704     10000
+macro avg      0.735     0.692     0.708     10000
+
+base16
+micro avg      0.705     0.680     0.692     10000
+macro avg      0.725     0.680     0.696     10000
+small8
+micro avg      0.661     0.639     0.649     10000
+macro avg      0.680     0.639     0.652     10000
+small16
+micro avg      0.615     0.593     0.604     10000
+macro avg      0.634     0.593     0.606     10000
+
+unknown:
+       apple bear bed  cow  giraffe person  all  accuracy
+base8:
+origin 104,  115, 104, 107, 126,    280     836  0.980
+test   100,  115, 104, 101, 126,    273     819
+base16:
+origin 104,  115, 104, 107, 126,    280     836  0.955
+test   96,   115, 104, 101, 126,    267     798
+small8:
+origin 104,  115, 104, 107, 126,    280     836  0.958
+test   96,   115, 104, 102, 126,    269     801
+small16:
+origin 104,  115, 104, 107, 126,    280     836  0.958
+test   98,   115, 104, 103, 126,    266     801
+
